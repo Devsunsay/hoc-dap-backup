@@ -26,16 +26,15 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 
 import fr.houseofcode.dap.server.mgw.google.Utils;
 
-/**
- * @author mgw
- *
- */
+/** @author mgw **/
 @Controller
 public class GoogleAccount {
 
-    /** Logger. */
+    /** Logger. **/
     private static final Logger LOG = LogManager.getLogger();
+    /** To secure stored data. **/
     private static final Integer SENSIBLE_DATA_FIRST_CHAR = 0;
+    /** To secure stored data. **/
     private static final Integer SENSIBLE_DATA_LAST_CHAR = 5;
 
     /**
@@ -45,7 +44,7 @@ public class GoogleAccount {
      * @param session the HTTP Session
      * @return the view to display
      * @throws ServletException When Google account could not be connected to DaP.
-     * @throws GeneralSecurityException 
+     * @throws GeneralSecurityException if there's a security failure
      */
     @RequestMapping("/oAuth2Callback")
     public String oAuthCallback(@RequestParam final String code, final HttpServletRequest request,
@@ -141,15 +140,14 @@ public class GoogleAccount {
         return url.build();
     }
 
-    /**
-     * Add a Google account (user will be prompt to connect and accept required
+    /** Add a Google account (user will be prompt to connect and accept required
      * access).
      * @param userKey  the user to store Data
      * @param request the HTTP request
      * @param session the HTTP session
      * @return the view to Display (on Error)
-     * @throws IOException 
-     * @throws GeneralSecurityException 
+     * @throws IOException if the sent or received message is broken
+     * @throws GeneralSecurityException if there's a security failure
      */
     @RequestMapping("/account/add/{userKey}")
     public String addAccount(@PathVariable final String userKey, final HttpServletRequest request,
@@ -178,8 +176,16 @@ public class GoogleAccount {
         return response;
     }
 
+    /**
+     * Add a Google account (user will be prompt to connect and accept required
+     * access).
+     * @param userKey allows a value for the user's parameter added to the absolute url
+     * @return a boolean according to whether the userKey already exists or not
+     * @throws IOException if the sent or received message is broken
+     * @throws GeneralSecurityException if there's a security failure
+     */
     @RequestMapping("/account/exists")
-    public Boolean isUserKeyExists(@RequestParam String userKey) throws GeneralSecurityException, IOException {
+    public Boolean isUserKeyExists(@RequestParam final String userKey) throws GeneralSecurityException, IOException {
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         GoogleAuthorizationCodeFlow flow = Utils.getFlow(httpTransport);
         Credential credential = flow.loadCredential(userKey);

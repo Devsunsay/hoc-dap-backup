@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class HelloController {
+    /** @return default welcoming text **/
     @RequestMapping("/")
     public String index() {
         return "Bibabou!";

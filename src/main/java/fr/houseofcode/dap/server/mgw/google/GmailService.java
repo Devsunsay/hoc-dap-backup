@@ -18,9 +18,7 @@ import com.google.api.services.gmail.model.ListLabelsResponse;
 import com.google.api.services.gmail.model.ListMessagesResponse;
 import com.google.api.services.gmail.model.Message;
 
-/**
- * @author adminHOC
- */
+/** @author mgw **/
 @Service
 public class GmailService {
 
@@ -58,11 +56,12 @@ public class GmailService {
 
     /**
      * allow the secured access to Gmail.
-     * @return an instance GmailService with secured transport.
+     * @return an instance GmailService with secured transport
+     * @param userKey5 allows a value for the user's parameter added to the url
      * @throws IOException if the sent or received message is broken.
      * @throws GeneralSecurityException if there's a security failure.
      */
-    private Gmail getService(String userKey5) throws IOException, GeneralSecurityException {
+    private Gmail getService(final String userKey5) throws IOException, GeneralSecurityException {
         // Build a new authorized API client service.
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         Gmail service = new Gmail.Builder(httpTransport, JSON_FACTORY, Utils.getCredentials(httpTransport, userKey5))
@@ -73,10 +72,11 @@ public class GmailService {
     /**
      * get all the labels of the Gmail account.
      * @return the list of labels.
+     * @param userKey56 allows a value for the user's parameter added to the url
      * @throws IOException if the sent or received message is broken.
      * @throws GeneralSecurityException if there's a security failure.
      */
-    public List<Label> getLabels(String userKey56) throws IOException, GeneralSecurityException {
+    public List<Label> getLabels(final String userKey56) throws IOException, GeneralSecurityException {
         LOG.info("Get the labels of the gmail account.");
         getService(userKey56);
         // Print the labels in the user's account.
@@ -90,10 +90,11 @@ public class GmailService {
     /**
      * Get the number of unread mails.
      * @return the number of unread mails.
+     * @param userKey101 allows a value for the user's parameter added to the url
      * @throws IOException if the sent or received message is broken.
      * @throws GeneralSecurityException if there's a security failure.
      */
-    public Integer getNbUnreadEmails(String userKey101) throws IOException, GeneralSecurityException {
+    public Integer getNbUnreadEmails(final String userKey101) throws IOException, GeneralSecurityException {
         LOG.info("Get the number of unread emails.");
         Integer resultUnread = null;
         getService(userKey101);

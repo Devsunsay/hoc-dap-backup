@@ -16,11 +16,17 @@ import fr.houseofcode.dap.server.mgw.google.GmailService;
  */
 @RestController
 public class EmailController {
-
+    /** connexion to Gmail as a service. **/
     @Autowired
     private GmailService service;
 
-    @RequestMapping
+    /** Provide the number of unread emails of the Gmail account.
+     * @return called data from GmailService
+     * @param userKey allows a value for the user's parameter added to the absolute url
+     * @throws IOException if the sent or received message is broken
+     * @throws GeneralSecurityException if there's a security failure
+     **/
+    @RequestMapping("/email/nbUnread")
     public Integer displayNbUnreadEmail(@RequestParam(value = "userKey", required = true) final String userKey)
             throws IOException, GeneralSecurityException {
         return service.getNbUnreadEmails(userKey);

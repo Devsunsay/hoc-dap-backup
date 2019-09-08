@@ -17,9 +17,7 @@ import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
 
-/**
- * @author adminHOC
- */
+/** @author mgw **/
 @Service
 public class CalendarService {
     /** Logger. */
@@ -32,11 +30,12 @@ public class CalendarService {
 
     /**
      * allow the secured access to Calendar.
-     * @return an instance GmailService with secured transport.
+     * @return an GmailService'instance with secured transport.
+     * @param userKey466 allows a value for the user's parameter added to the url
      * @throws IOException if the sent or received message is broken.
      * @throws GeneralSecurityException if there's a security failure.
      */
-    private Calendar getService(String userKey466) throws IOException, GeneralSecurityException {
+    private Calendar getService(final String userKey466) throws IOException, GeneralSecurityException {
         LOG.debug("Start a secured access");
         // Build a new authorized API client service.
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
@@ -47,11 +46,12 @@ public class CalendarService {
 
     /**
      * get the next event.
-     * @return the next event of it exists.
+     * @return the next event if it exists
+     * @param userKey466 allows a value for the user's parameter added to the url
      * @throws IOException if the sent or received message is broken.
      * @throws GeneralSecurityException if there's a security failure.
      */
-    public String getNextEvent(String userKey466) throws IOException, GeneralSecurityException {
+    public String getNextEvent(final String userKey466) throws IOException, GeneralSecurityException {
         getService(userKey466);
         // List the next 10 events from the primary calendar.
         DateTime now = new DateTime(System.currentTimeMillis());
