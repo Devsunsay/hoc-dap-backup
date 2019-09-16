@@ -29,6 +29,7 @@ import com.google.api.services.gmail.GmailScopes;
  * @return An authorized Credential object.
  * @throws IOException If the credentials.json file cannot be found.
  */
+//TODO mgw by Djer |IOC| Cette classe n'a pas (plus) besoins de conteni que desméthdoe static (classe utilitaire). Elle devrait être un service, et injecté (Autowired) dans les classes qui en ont besoins.
 public final class Utils {
 
     /** The default JsonFactory. */
@@ -60,9 +61,10 @@ public final class Utils {
      **/
     public static Credential getCredentials(final NetHttpTransport httpTransport, final String userKey)
             throws IOException {
-
+        //TODO mgw by Djer |Log4J| Une petite log ? (contextualisée)
         //LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
         //return new AuthorizationCodeInstalledApp(getFlow(HTTP_TRANSPORT), receiver).authorize("user");
+        //TODO mgw by Djer |POO| A chaque apel a getCredential, 2 éléments sont ajoutés dans la liset "Scope". Google le  gère pas trop mal , mais au bout d'un moment tu risque de satuer la mémoired e Dap-Server (d'une TRES long moment). En transformatnt cette classe en classe "objet" (au lieus des "static" partout) tu peux réaliser l'alimentatio nde la liste dans le constructeurs (ta liste ne contiendrat que 2 éléments). Comme ca sera un Service, Spring fera de cette classe un singleton et ta liste ne sera présente qu'une fois "dans le serveur"
         SCOPES.add(CalendarScopes.CALENDAR_READONLY);
         SCOPES.add(GmailScopes.GMAIL_READONLY);
 
@@ -97,6 +99,7 @@ public final class Utils {
 
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, in);
 
+        //TODO mgw by Djer |POO| Ce commentaire est devenu faux, il n'y a plus de "trigger" ici (cétait effectué par le code "return new AuthorizationCodeInstalledApp(getFlow(httpTransport), receiver).authorize("user")").
         // Build flow and trigger user authorization request.
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport, JSON_FACTORY,
                 clientSecrets, SCOPES)

@@ -13,8 +13,10 @@ import com.google.api.services.gmail.model.Label;
 
 import fr.houseofcode.dap.server.mgw.google.GmailService;
 
+//TODO mgw by Djer |JavaDoc| Il devrait y avoir une description de la classe
 /** @author mgw **/
 @RestController
+//TODO mgw by Djer |Spring| Tu aurais pus créer la méthode "displayLabel(...) dans le controller "GmailController" comme ces deux éléments sont étroitement liés. "Un controller fait des actions, qui sont associées à des url. Il réunit plusieurs pages qui vont avoir un point commun." Gwen Spetembre 2019 ^^.
 public class LabelController {
     /** connexion to Gmail as a service. **/
     @Autowired

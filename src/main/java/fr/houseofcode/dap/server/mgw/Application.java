@@ -1,3 +1,4 @@
+//TODO mgw by Djer |JavaDoc| Il devrait y avoir un "package-info.java" dnas ce package, notament pour y indiquer l'utilité de ce package
 package fr.houseofcode.dap.server.mgw;
 
 import java.util.Arrays;
@@ -8,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+//TODO mgw by Djer |JavaDoc| Il devrait y avoir une description de la classe ("Server Launcher" est suffisant).
 /** @author mgw **/
 @SpringBootApplication
 public class Application {
@@ -18,6 +20,8 @@ public class Application {
     public static void main(final String[] args) {
         SpringApplication.run(Application.class, args);
     }
+
+    //TODO mgw by Djer |Spring| Cette méthode sert au "tuto" pour vérifier que Spring fonctionne. Tu peux la supprimer. Pour Info elle affiche (dans la console) tous ce qui est "enregistré" dans le conteneur IOC de Spring.
 
     /** Spring beginning.
      * @return the array of beanNames

@@ -18,6 +18,7 @@ import com.google.api.services.gmail.model.ListLabelsResponse;
 import com.google.api.services.gmail.model.ListMessagesResponse;
 import com.google.api.services.gmail.model.Message;
 
+//TODO mgw by Djer |JavaDoc| Il devrait y avoir une description de la classe
 /** @author mgw **/
 @Service
 public class GmailService {
@@ -30,6 +31,7 @@ public class GmailService {
     /** The default JsonFactory. */
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     /** The default user. */
+    //TODO mgw by Djer |POO| Pourrait être final. Devrait alors être écrit entièrement en majuscules.
     private static String user = "me";
     //    /** Singleton. */
     //    private static GmailService instance;
@@ -62,6 +64,7 @@ public class GmailService {
      * @throws GeneralSecurityException if there's a security failure.
      */
     private Gmail getService(final String userKey5) throws IOException, GeneralSecurityException {
+        //TODO mgw by Djer |Log4J| Une petite log ? (contextualisée)
         // Build a new authorized API client service.
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         Gmail service = new Gmail.Builder(httpTransport, JSON_FACTORY, Utils.getCredentials(httpTransport, userKey5))
@@ -77,12 +80,16 @@ public class GmailService {
      * @throws GeneralSecurityException if there's a security failure.
      */
     public List<Label> getLabels(final String userKey56) throws IOException, GeneralSecurityException {
+        //TODO mgw by Djer |Log4J| Contextualise tes logs (ajoute "for userKey : " + userKey56)
         LOG.info("Get the labels of the gmail account.");
         getService(userKey56);
+
+        //TODO mgw by Djer |POO| Ce commentaire est devenu faux, ce code de "print" rien, il récupère les infos.
         // Print the labels in the user's account.
         ListLabelsResponse listResponse = getService(userKey56).users().labels().list(user).execute();
         List<Label> labels = listResponse.getLabels();
 
+        //TODO mgw by Djer |Log4J| Contextualise tes logs (ajoute "for userKey : " + userKey56)
         LOG.debug("Number of found Gmail labels : " + labels.size());
         return labels;
     }
@@ -95,20 +102,25 @@ public class GmailService {
      * @throws GeneralSecurityException if there's a security failure.
      */
     public Integer getNbUnreadEmails(final String userKey101) throws IOException, GeneralSecurityException {
+        //TODO mgw by Djer |Log4J| Contextualise tes logs (ajoute "for userKey : " + userKey101)
         LOG.info("Get the number of unread emails.");
         Integer resultUnread = null;
         getService(userKey101);
+        //TODO mgw by Djer |POO| Ce commentaire est devenu faux, ce code de "print" rien, il récupère les infos.
         // Print the unread messages in the user's account.
+        //TODO mgw by Djer |API Google| Ajoute le filtre sur "dans la boite principal" ?
         ListMessagesResponse listUnreadMessages = getService(userKey101).users().messages().list(user).setQ("is:unread")
                 .execute();
         List<Message> messages = listUnreadMessages.getMessages();
 
         if (messages.isEmpty()) {
+            //TODO mgw by Djer |Log4J| Une petite log ? (contextualisée)
             //System.out.println("No unread message found.");
             resultUnread = 0;
         } else {
             resultUnread = messages.size();
             //System.out.println("Number of unread messages: " + nbunreadmessage);
+            //TODO mgw by Djer |Log4J| Contextualise tes logs (ajoute "for userKey : " + userKey101)
             LOG.debug("Number of unread emails : " + messages.size());
         }
         return resultUnread;

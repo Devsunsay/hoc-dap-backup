@@ -29,6 +29,7 @@
 			  	<version>1.23.0</version>
 		  	</dependency>
 		  	
+		  	<!-- TODO mgw by Djer |Maven| Cette dépendance n'est plus utile depuis qu'on a passé les credential Google en mode "web" -->
 		  	<dependency>
 			  	<groupId>com.google.oauth-client</groupId>
 			  	<artifactId>google-oauth-client-jetty</artifactId>

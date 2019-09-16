@@ -26,12 +26,14 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 
 import fr.houseofcode.dap.server.mgw.google.Utils;
 
+//TODO mgw by Djer |JavaDoc| Il devrait y avoir une description de la classe
 /** @author mgw **/
 @Controller
 public class GoogleAccount {
 
     /** Logger. **/
     private static final Logger LOG = LogManager.getLogger();
+    //TODO mgw by Djer |POO| Pas vrai, cela sécure ***l'affichage" de donnée senssible dans les logs (qui peuvent éventuellement être stockées).
     /** To secure stored data. **/
     private static final Integer SENSIBLE_DATA_FIRST_CHAR = 0;
     /** To secure stored data. **/
@@ -167,7 +169,6 @@ public class GoogleAccount {
                 authorizationUrl.setRedirectUri(buildRedirectUri(request, "/oAuth2Callback"));
                 // store userKey in session for CallBack Access
                 session.setAttribute("userKey", userKey);
-                //TODO bam by Djer |API Google| Sauvegarde le "loginName" ici en session pour l'utiliser dans le oAuth2Callback
                 response = "redirect:" + authorizationUrl.build();
             }
         } catch (IOException e) {
@@ -190,9 +191,9 @@ public class GoogleAccount {
         GoogleAuthorizationCodeFlow flow = Utils.getFlow(httpTransport);
         Credential credential = flow.loadCredential(userKey);
         if (credential != null && credential.getAccessToken() != null) {
-
+            //TODO mgw by Djer |IDE| Tu devrais indiquer ici un TO-DO (ou un FIX-ME) pour indiquer que tu dois finir de l'implémenter.
         } else {
-
+            //TODO mgw by Djer |IDE| Tu devrais indiquer ici un TO-DO (ou un FIX-ME) pour indiquer que tu dois finir de l'implémenter.
         }
 
         return false;

@@ -17,6 +17,7 @@ import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
 
+//TODO mgw by Djer |JavaDoc| Il devrait y avoir une description de la classe
 /** @author mgw **/
 @Service
 public class CalendarService {
@@ -31,11 +32,12 @@ public class CalendarService {
     /**
      * allow the secured access to Calendar.
      * @return an GmailService'instance with secured transport.
-     * @param userKey466 allows a value for the user's parameter added to the url
+     * @param userKey466 allows a value for the user's parameter added to the url //TODO mgw by Djer |JavaDoc| Tu ne dois pas indiquer le "comment"
      * @throws IOException if the sent or received message is broken.
      * @throws GeneralSecurityException if there's a security failure.
      */
     private Calendar getService(final String userKey466) throws IOException, GeneralSecurityException {
+        //TODO mgw by Djer |Log4J| Contextualise tes logs "Start a secured Google Calendar access for user : " + userKey466" serait mieux.
         LOG.debug("Start a secured access");
         // Build a new authorized API client service.
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
@@ -47,12 +49,14 @@ public class CalendarService {
     /**
      * get the next event.
      * @return the next event if it exists
-     * @param userKey466 allows a value for the user's parameter added to the url
+     * @param userKey466 allows a value for the user's parameter added to the url //TODO mgw by Djer |JavaDoc| Tu ne dois pas indiquer le "comment"
      * @throws IOException if the sent or received message is broken.
      * @throws GeneralSecurityException if there's a security failure.
      */
     public String getNextEvent(final String userKey466) throws IOException, GeneralSecurityException {
         getService(userKey466);
+        //TODO mgw by Djer |POO| Ce commentaire est devenu faux (tu récupère les 2 prochains)
+        //TODO mgw by Djer |API Google| Pourqoi les **deux** prochains et pas uniquement **le** prochain ?
         // List the next 10 events from the primary calendar.
         DateTime now = new DateTime(System.currentTimeMillis());
         Events events = getService(userKey466).events().list("primary").setMaxResults(2).setTimeMin(now)
