@@ -3,6 +3,8 @@ package fr.houseofcode.dap.server.mgw;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +15,10 @@ import fr.houseofcode.dap.server.mgw.google.CalendarService;
 /** @author mgw **/
 @RestController
 public class CalendarController {
-    /** connexion to Gmail Calendar as a service. **/
+    /** Logger. */
+    private static final Logger LOG = LogManager.getLogger();
+    
+    /** connection to Gmail Calendar as a service. **/
     @Autowired
     private CalendarService service;
 
@@ -25,6 +30,7 @@ public class CalendarController {
      **/
     @RequestMapping("/calendar/nextEvent")
     public String displayNextEvent(@RequestParam final String userKey) throws IOException, GeneralSecurityException {
+        LOG.info("userKey for /calendar/nextEvent : " + userKey);
 
         return service.getNextEvent(userKey);
     }

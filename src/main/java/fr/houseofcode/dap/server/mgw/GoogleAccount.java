@@ -55,6 +55,8 @@ public class GoogleAccount {
         final String redirectUri = buildRedirectUri(request, "/oAuth2Callback");
 
         final String userKey = getUserid(session);
+        
+        LOG.info("userKey for /oAuth2Callback : " + userKey);
 
         try {
             NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
@@ -72,7 +74,6 @@ public class GoogleAccount {
                             + credential.getAccessToken().substring(SENSIBLE_DATA_FIRST_CHAR, SENSIBLE_DATA_LAST_CHAR));
                 }
             }
-            // onSuccess(request, resp, credential);
         } catch (IOException e) {
             LOG.error("Exception while trying to store user Credential", e);
             throw new ServletException("Error while trying to conenct Google Account");
@@ -88,7 +89,9 @@ public class GoogleAccount {
      * @throws ServletException if no User Id in session
      */
     private String getUserid(final HttpSession session) throws ServletException {
+    	
         String userKey = null;
+        
         if (null != session && null != session.getAttribute("userKey")) {
             userKey = (String) session.getAttribute("userKey");
         }
@@ -107,7 +110,9 @@ public class GoogleAccount {
      * @throws ServletException if the code cannot be decoded
      */
     private String extracCode(final HttpServletRequest request) throws ServletException {
-        final StringBuffer buf = request.getRequestURL();
+    	
+    	final StringBuffer buf = request.getRequestURL();
+        
         if (null != request.getQueryString()) {
             buf.append('?').append(request.getQueryString());
         }
@@ -120,8 +125,8 @@ public class GoogleAccount {
 
         if (null != responseUrl.getError()) {
             LOG.error("Error when trying to add Google acocunt : " + responseUrl.getError());
+            
             throw new ServletException("Error when trying to add Google acocunt");
-            // onError(request, resp, responseUrl);
         }
 
         return decodeCode;
@@ -135,8 +140,11 @@ public class GoogleAccount {
      * @return an absolute URI
      */
     protected String buildRedirectUri(final HttpServletRequest req, final String destination) {
+    	
         final GenericUrl url = new GenericUrl(req.getRequestURL().toString());
+        
         url.setRawPath(destination);
+        
         return url.build();
     }
 
@@ -152,10 +160,14 @@ public class GoogleAccount {
     @RequestMapping("/account/add/{userKey}")
     public String addAccount(@PathVariable final String userKey, final HttpServletRequest request,
             final HttpSession session) throws GeneralSecurityException, IOException {
+    	
+        LOG.info("userKey for /account/add/{userKey} : " + userKey);
+
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         String response = "errorOccurs";
         GoogleAuthorizationCodeFlow flow;
         Credential credential = null;
+        
         try {
             flow = Utils.getFlow(httpTransport);
             credential = flow.loadCredential(userKey);
@@ -186,6 +198,9 @@ public class GoogleAccount {
      */
     @RequestMapping("/account/exists")
     public Boolean isUserKeyExists(@RequestParam final String userKey) throws GeneralSecurityException, IOException {
+    	
+        LOG.info("userKey for /account/exists : " + userKey);
+
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         GoogleAuthorizationCodeFlow flow = Utils.getFlow(httpTransport);
         Credential credential = flow.loadCredential(userKey);

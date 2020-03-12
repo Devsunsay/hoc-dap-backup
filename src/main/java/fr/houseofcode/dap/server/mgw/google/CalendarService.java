@@ -36,11 +36,13 @@ public class CalendarService {
      * @throws GeneralSecurityException if there's a security failure.
      */
     private Calendar getService(final String userKey466) throws IOException, GeneralSecurityException {
-        LOG.debug("Start a secured access");
+        LOG.info("Start a secured access in the Google Calendar Service for " + userKey466);
+        
         // Build a new authorized API client service.
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         Calendar service = new Calendar.Builder(httpTransport, JSON_FACTORY,
                 Utils.getCredentials(httpTransport, userKey466)).setApplicationName(APPLICATION_NAME).build();
+        
         return service;
     }
 
@@ -52,6 +54,8 @@ public class CalendarService {
      * @throws GeneralSecurityException if there's a security failure.
      */
     public String getNextEvent(final String userKey466) throws IOException, GeneralSecurityException {
+        LOG.info("Get the next event of the gmail account for the user " + userKey466 + ".");
+
         getService(userKey466);
         // List the next 10 events from the primary calendar.
         DateTime now = new DateTime(System.currentTimeMillis());
@@ -72,9 +76,11 @@ public class CalendarService {
                 if (start == null) {
                     start = event.getStart().getDate();
                 }
-
+               
                 eventText = eventText + event.getSummary() + " (" + start + ")\n";
+                
                 //System.out.printf("%s (%s)\n", event.getSummary(), start);
+                LOG.debug("Next event text : " + eventText);
             }
         }
 
