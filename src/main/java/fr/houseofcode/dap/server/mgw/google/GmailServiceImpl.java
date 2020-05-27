@@ -2,6 +2,7 @@ package fr.houseofcode.dap.server.mgw.google;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -20,7 +21,7 @@ import com.google.api.services.gmail.model.Message;
 
 /** @author mgw **/
 @Service
-public class GmailServiceImpl implements GmailService{
+public class GmailServiceImpl implements GmailService {
 
     /** Logger. */
     private static final Logger LOG = LogManager.getLogger();
@@ -31,7 +32,7 @@ public class GmailServiceImpl implements GmailService{
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     /** The default user. */
     private static String user = "me";
-    
+
     //    /** Singleton. */
     //    private static GmailService instance;
     //    /** Number of unread messages. */
@@ -69,7 +70,7 @@ public class GmailServiceImpl implements GmailService{
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         Gmail service = new Gmail.Builder(httpTransport, JSON_FACTORY, Utils.getCredentials(httpTransport, userKey5))
                 .setApplicationName(APPLICATION_NAME).build();
-        
+
         return service;
     }
 
@@ -80,16 +81,24 @@ public class GmailServiceImpl implements GmailService{
      * @throws IOException if the sent or received message is broken.
      * @throws GeneralSecurityException if there's a security failure.
      */
-    public List<Label> getLabels(final String userKey56) throws IOException, GeneralSecurityException {
+    @Override
+    public List<String> getLabels(final String userKey56) throws IOException, GeneralSecurityException {
         LOG.info("Get the labels of the gmail account for the user " + userKey56 + ".");
-        
+
         getService(userKey56);
         // Print the labels in the user's account.
         ListLabelsResponse listResponse = getService(userKey56).users().labels().list(user).execute();
         List<Label> labels = listResponse.getLabels();
-
         LOG.debug("Number of found Gmail labels : " + labels.size());
-        return labels;
+
+        List<String> labelNames = new ArrayList<String>();
+
+        for (Label label : labels) {
+            LOG.info("Gmail label name : " + label.getName());
+            labelNames.add(label.getName());
+        }
+
+        return labelNames;
     }
 
     /**
@@ -99,9 +108,10 @@ public class GmailServiceImpl implements GmailService{
      * @throws IOException if the sent or received message is broken.
      * @throws GeneralSecurityException if there's a security failure.
      */
+    @Override
     public Integer getNbUnreadEmails(final String userKey101) throws IOException, GeneralSecurityException {
         LOG.info("Get the number of unread emails for the user " + userKey101 + ".");
-        
+
         Integer resultUnread = null;
         getService(userKey101);
         // Print the unread messages in the user's account.
@@ -114,7 +124,7 @@ public class GmailServiceImpl implements GmailService{
             resultUnread = 0;
         } else {
             resultUnread = messages.size();
-            
+
             //System.out.println("Number of unread messages: " + resultUnread);
             LOG.debug("Number of unread emails : " + messages.size());
         }

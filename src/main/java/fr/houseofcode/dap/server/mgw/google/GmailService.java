@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
-import com.google.api.services.gmail.model.Label;
-
 /**
  * @author gma
  *
@@ -23,7 +21,7 @@ public interface GmailService {
      * @throws GeneralSecurityException if there's a security failure.
      */
     Integer getNbUnreadEmails(String userKey) throws IOException, GeneralSecurityException;
-    
+
     /**
      * get all the labels of the Gmail account.
      * @return the list of labels.
@@ -31,5 +29,5 @@ public interface GmailService {
      * @throws IOException if the sent or received message is broken.
      * @throws GeneralSecurityException if there's a security failure.
      */
-    List<Label> getLabels(final String userKey56) throws IOException, GeneralSecurityException;
+    List<String> getLabels(final String userKey56) throws IOException, GeneralSecurityException;
 }

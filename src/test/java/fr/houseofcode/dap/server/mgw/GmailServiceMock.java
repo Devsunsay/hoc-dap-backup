@@ -16,7 +16,7 @@ import fr.houseofcode.dap.server.mgw.google.GmailService;
  * @author gma
  *
  */
-public class GmailServiceMock implements GmailService{
+public class GmailServiceMock implements GmailService {
 
     /**
      * MOCK: Renvoie le nombre d'emails non lus dans la bo$ite principale
@@ -24,25 +24,31 @@ public class GmailServiceMock implements GmailService{
      * @throws IOException
      * @throws GeneralSecurityException
      */
+    @Override
     public Integer getNbUnreadEmails(String userKey) throws IOException, GeneralSecurityException {
 
         return 12;
     }
 
-	@Override
-	public List<Label> getLabels(String userKey56) throws IOException, GeneralSecurityException {
-		// TODO Auto-generated method stub
-		Label label1 = new Label();
-		label1.setName("bouchon mignon 1");
-		
-		Label label2 = new Label();
-		label1.setName("bouchon mignon 12");
-		
-		List<Label> data = new ArrayList<Label>();
-		
-		data.add(1, label1);
-		data.add(2, label2);
+    @Override
+    public List<String> getLabels(String userKey56) throws IOException, GeneralSecurityException {
+        // TODO Auto-generated method stub
+        Label label1 = new Label();
+        label1.setName("bouchon mignon 1");
 
-		return data;
-	}
+        Label label2 = new Label();
+        label1.setName("bouchon mignon 12");
+
+        //		List<Label> data = new ArrayList<Label>();
+        //		
+        //		data.add(1, label1);
+        //		data.add(2, label2);
+
+        List<String> data = new ArrayList<String>();
+
+        data.add(1, label1.getName());
+        data.add(2, label2.getName());
+
+        return data;
+    }
 }

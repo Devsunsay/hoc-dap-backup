@@ -34,7 +34,8 @@ public final class Utils {
     /** The default JsonFactory. */
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     /**  */
-    private static final String TOKENS_DIRECTORY_PATH = System.getProperty("user.home") + "/dap/tokens";
+    private static final String TOKENS_DIRECTORY_PATH = System.getProperty("user.home") + File.separator + "git"
+            + File.separator + "hoc-dap-backup" + File.separator + "tokens";
 
     /**
      * Global instance of the scopes required by this quick start.
@@ -42,7 +43,8 @@ public final class Utils {
      */
     private static final List<String> SCOPES = new ArrayList<String>();
     /**  */
-    private static final String CREDENTIALS_FILE_PATH = System.getProperty("user.home") + "/dap/credentials.json";
+    private static final String CREDENTIALS_FILE_PATH = System.getProperty("user.home") + File.separator + "git"
+            + File.separator + "hoc-dap-backup" + File.separator + "credentials.json";
 
     /**
      * is an empty private constructor (cf.Singleton pattern).

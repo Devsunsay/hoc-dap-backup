@@ -49,6 +49,16 @@
         </dependency>
         
         <dependency>
+		  <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.h2database</groupId>
+		  <artifactId>h2</artifactId>
+		</dependency>
+        
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
@@ -148,24 +158,24 @@
 	<reporting>
 		<plugins>
 			<plugin>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.10.0</version>
-				<configuration>
-					<linkXref>true</linkXref>
-					<targetJdk>1.8</targetJdk>
-					<skipEmptyReport>false</skipEmptyReport>
-					<minimumTokens>75</minimumTokens>
-					<rulesets>
-						<ruleset>/pmd/dap_pmd.xml</ruleset>
-					</rulesets>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>2.9</version>
-			</plugin>
+            	<artifactId>maven-pmd-plugin</artifactId>
+            	<version>3.10.0</version>
+            	<configuration>
+                	<linkXref>true</linkXref>
+                	<targetJdk>1.8</targetJdk>
+                	<skipEmptyReport>false</skipEmptyReport>
+                	<minimumTokens>75</minimumTokens>
+                	<rulesets>
+                    	<ruleset>/pmd/dap_pmd.xml</ruleset>
+                	</rulesets>
+            	</configuration>
+        	</plugin>
+        	
+        	<plugin>
+            	<groupId>org.apache.maven.plugins</groupId>
+            	<artifactId>maven-project-info-reports-plugin</artifactId>
+            	<version>2.9</version>
+        	</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -180,7 +190,7 @@
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>3.0.0</version>
 				<configuration>
-					<configLocation>checkstyle/dap_checkstyle_checks.xml</configLocation>
+					<configLocation>dap_checkstyle_checks.xml</configLocation>
 				</configuration>
 				<reportSets>
 					<reportSet>

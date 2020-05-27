@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.api.services.gmail.model.Label;
-
 import fr.houseofcode.dap.server.mgw.google.GmailService;
 
 /** @author mgw **/
@@ -20,7 +18,7 @@ import fr.houseofcode.dap.server.mgw.google.GmailService;
 public class LabelController {
     /** Logger. */
     private static final Logger LOG = LogManager.getLogger();
-    
+
     /** connexion to Gmail as a service. **/
     @Autowired
     private GmailService service;
@@ -32,15 +30,15 @@ public class LabelController {
      * @throws GeneralSecurityException if there's a security failure.
      **/
     @RequestMapping("/email/labels")
-    public List<Label> displayLabels(@RequestParam final String userKey) throws IOException, GeneralSecurityException {
+    public List<String> displayLabels(@RequestParam final String userKey) throws IOException, GeneralSecurityException {
 
         LOG.info("userKey for /email/labels : " + userKey);
 
         return service.getLabels(userKey);
     }
-    
+
     public void setService(GmailService gmailService) {
-		// TODO Auto-generated method stub
-		this.service = gmailService;
+        // TODO Auto-generated method stub
+        this.service = gmailService;
     }
 }
