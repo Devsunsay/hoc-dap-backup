@@ -14,8 +14,10 @@ import fr.houseofcode.dap.server.mgw.google.CalendarService;
 /** @author mgw **/
 @RestController
 public class CalendarController {
-    //TODO mgw by Djer |JavaDoc| Dans ta Description il ne s'agit pas de "Gmail" mais de "Google".
-    /** connexion to Gmail Calendar as a service. **/
+    /** Logger. */
+    private static final Logger LOG = LogManager.getLogger();
+    
+    /** connection to Gmail Calendar as a service. **/
     @Autowired
     private CalendarService service;
 
@@ -28,6 +30,7 @@ public class CalendarController {
      **/
     @RequestMapping("/calendar/nextEvent")
     public String displayNextEvent(@RequestParam final String userKey) throws IOException, GeneralSecurityException {
+        LOG.info("userKey for /calendar/nextEvent : " + userKey);
 
         return service.getNextEvent(userKey);
     }

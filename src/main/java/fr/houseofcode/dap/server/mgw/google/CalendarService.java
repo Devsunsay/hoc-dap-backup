@@ -37,12 +37,13 @@ public class CalendarService {
      * @throws GeneralSecurityException if there's a security failure.
      */
     private Calendar getService(final String userKey466) throws IOException, GeneralSecurityException {
-        //TODO mgw by Djer |Log4J| Contextualise tes logs "Start a secured Google Calendar access for user : " + userKey466" serait mieux.
-        LOG.debug("Start a secured access");
+        LOG.info("Start a secured access in the Google Calendar Service for " + userKey466);
+
         // Build a new authorized API client service.
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         Calendar service = new Calendar.Builder(httpTransport, JSON_FACTORY,
                 Utils.getCredentials(httpTransport, userKey466)).setApplicationName(APPLICATION_NAME).build();
+
         return service;
     }
 
@@ -54,6 +55,8 @@ public class CalendarService {
      * @throws GeneralSecurityException if there's a security failure.
      */
     public String getNextEvent(final String userKey466) throws IOException, GeneralSecurityException {
+        LOG.info("Get the next event of the gmail account for the user " + userKey466 + ".");
+
         getService(userKey466);
         //TODO mgw by Djer |POO| Ce commentaire est devenu faux (tu récupère les 2 prochains)
         //TODO mgw by Djer |API Google| Pourqoi les **deux** prochains et pas uniquement **le** prochain ?
@@ -73,12 +76,21 @@ public class CalendarService {
         } else {
             for (Event event : items) {
                 DateTime start = event.getStart().getDateTime();
+                DateTime end = event.getEnd().getDateTime();
+
                 if (start == null) {
                     start = event.getStart().getDate();
                 }
 
-                eventText = eventText + event.getSummary() + " (" + start + ")\n";
+                if (end == null) {
+                    end = event.getEnd().getDateTime();
+                }
+
+                eventText = "Event «" + eventText + event.getSummary() + "» (starting on " + start + "; ending on "
+                        + end + ")\n";
+
                 //System.out.printf("%s (%s)\n", event.getSummary(), start);
+                LOG.debug("Next event text : " + eventText);
             }
         }
 

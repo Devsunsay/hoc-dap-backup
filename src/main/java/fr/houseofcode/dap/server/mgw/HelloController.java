@@ -12,6 +12,6 @@ public class HelloController {
     /** @return default welcoming text **/
     @RequestMapping("/")
     public String index() {
-        return "Bibabou!";
+        return "Hello ! \n The existing users are : ";
     }
 }
