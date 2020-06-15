@@ -8,8 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import fr.houseofcode.dap.server.mgw.GoogleAccount;
-
+//TODO MGW by Djer |JavaDoc| Il devrait y avoir une description de la classe
 /**
  * @author mgw
  *
@@ -32,7 +31,8 @@ public class AppUser {
     /**
      * List of googleAccount Entity.
      */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "appUser")
+    //TODO MGW by Djer |JPA| Le "mappedBy" fait référence à **l'attribut** de l classe liée (grace au typage JAVA) qui contient le lien. Dans ton cas ce n'estp as appUser mais "owner". Je te l'ai corrigé.
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private List<GoogleAccount> googleAccounts;
 
     /**
@@ -78,6 +78,7 @@ public class AppUser {
         this.googleAccounts = userGoogleAccounts;
     }
 
+    //TODO MGW by Djer |POO| attention tu as importé le "GoogleAccount" du package "server.mgw" au lieu de "data.mgw" (je te l'ai corrigé). En Java il n'est pas utile d'importer les classes qui sont dans le **même** package, j'ai donc simplement supprimé l'import.
     /**
      * Method to add a googleAccount.
      * @param account

@@ -19,6 +19,7 @@ import com.google.api.services.gmail.model.ListLabelsResponse;
 import com.google.api.services.gmail.model.ListMessagesResponse;
 import com.google.api.services.gmail.model.Message;
 
+//TODO MGW by Djer |JavaDoc| Il devrait y avoir une description de la classe
 /** @author mgw **/
 @Service
 public class GmailServiceImpl implements GmailService {
@@ -114,6 +115,7 @@ public class GmailServiceImpl implements GmailService {
 
         Integer resultUnread = null;
         getService(userKey101);
+        //TODO MGW by DJer |API Google| Par defaut Google renvoie les 100 premiers résultats. Il faut utiliser le systeme de pagination pour avoir un chiffre juste si l'utilsiateur à plus de 100 email non lus.
         // Print the unread messages in the user's account.
         ListMessagesResponse listUnreadMessages = getService(userKey101).users().messages().list(user).setQ("is:unread")
                 .execute();

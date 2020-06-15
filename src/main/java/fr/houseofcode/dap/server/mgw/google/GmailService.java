@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
+//TODO MGW by Djer |JavaDoc| Il devrait y avoir une description de la classe
 /**
  * @author gma
  *
@@ -16,7 +17,7 @@ public interface GmailService {
     /**
      * Get the number of unread mails.
      * @return the number of unread mails.
-     * @param userKey101 allows a value for the user's parameter added to the url
+     * @param userKey101 allows a value for the user's parameter added to the url //TODO MGW by Djer |JavaDoc| Le nom du paramètre n'est pas (plus?) correcte.
      * @throws IOException if the sent or received message is broken.
      * @throws GeneralSecurityException if there's a security failure.
      */

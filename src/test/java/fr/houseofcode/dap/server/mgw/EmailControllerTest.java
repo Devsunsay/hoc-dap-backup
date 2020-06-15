@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.web.bind.annotation.RestController;
 
+//TODO MGW by Djer |IDE| Configure ton IDE pour gèrer automatiquement les Imports (window->preferences->save Action) Vérifie aussi l'encodage des ficheir (Help->Perform setups tasks)
 import fr.houseofcode.dap.server.mgw.google.GmailServiceImpl;
 
 
@@ -24,7 +25,7 @@ public class EmailControllerTest {
 	        
 	        ec.setService(new GmailServiceMock());
 
-	        //Appel de la mÃ©thode
+	        //Appel de la méthode
 	        Integer expectedEmailNumber = 25;
 	        Integer result = ec.displayNbUnreadEmail("mgw");
 	        
