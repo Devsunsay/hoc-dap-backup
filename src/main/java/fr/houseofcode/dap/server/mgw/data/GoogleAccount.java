@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+//TODO MGW by Djer |JavaDoc| Il devrait y avoir une description de la classe
 /**
  * @author mgw
  *

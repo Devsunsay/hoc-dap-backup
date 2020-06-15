@@ -1,4 +1,4 @@
-//TODO mgw by Djer |JavaDoc| Il devrait y avoir un "package-info.java" dnas ce package, notament pour y indiquer l'utilitÃ© de ce package
+//TODO MGW by Djer |JavaDoc| Il devrait y avoir un "package-info.java" dans ce package, notament pour y indiquer l'utilité de ce package
 package fr.houseofcode.dap.server.mgw;
 
 import java.util.Arrays;
@@ -11,13 +11,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-//TODO mgw by Djer |JavaDoc| Il devrait y avoir une description de la classe ("Server Launcher" est suffisant).
+//TODO MGW by Djer |JavaDoc| Il devrait y avoir une description de la classe ("Server Launcher" est suffisant).
+//TODO MGW by Djer |IDE| configure ton Eclipse pour le formatage du code (indentation en espace au lieu de tab). Ca sera corrigé sur les fichiers ou j'ai fait des modifications.
 /** @author mgw **/
 @SpringBootApplication
 public class Application {
-	/** Logger. */
+    /** Logger. */
     private static final Logger LOG = LogManager.getLogger();
-    
+
     /**
      * is the start of the Spring program.
      * @param args is the external parameters.
@@ -26,7 +27,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    //TODO mgw by Djer |Spring| Cette mÃ©thode sert au "tuto" pour vÃ©rifier que Spring fonctionne. Tu peux la supprimer. Pour Info elle affiche (dans la console) tous ce qui est "enregistrÃ©" dans le conteneur IOC de Spring.
+    //TODO MGW by Djer |Spring| Cette méthode sert au "tuto" pour vérifier que Spring fonctionne. Tu peux la supprimer. Pour Info elle affiche (dans la console) tous ce qui est "enregistré" dans le conteneur IOC de Spring.
 
     /** Spring beginning.
      * @return the array of beanNames
@@ -44,7 +45,7 @@ public class Application {
             for (String beanName : beanNames) {
                 LOG.debug("beanName :" + beanName);
             }
-            
+
             LOG.debug("End of the beans provided by Spring Boot.");
         };
     }

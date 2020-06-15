@@ -26,14 +26,14 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 
 import fr.houseofcode.dap.server.mgw.google.Utils;
 
-//TODO mgw by Djer |JavaDoc| Il devrait y avoir une description de la classe
+//TODO MGW by Djer |JavaDoc| Il devrait y avoir une description de la classe
 /** @author mgw **/
 @Controller
 public class GoogleAccount {
 
     /** Logger. **/
     private static final Logger LOG = LogManager.getLogger();
-    //TODO mgw by Djer |POO| Pas vrai, cela sÃ©cure ***l'affichage" de donnÃ©e senssible dans les logs (qui peuvent Ã©ventuellement Ãªtre stockÃ©es).
+    //TODO MGW by Djer |POO| Pas vrai, cela sécurise ***l'affichage" de donnée senssible dans les **logs** (qui peuvent éventuellement être stockées).
     /** To secure stored data. **/
     private static final Integer SENSIBLE_DATA_FIRST_CHAR = 0;
     /** To secure stored data. **/
@@ -75,6 +75,7 @@ public class GoogleAccount {
                     LOG.debug("New user credential stored with userKey : " + userKey + "partial AccessToken : "
                             + credential.getAccessToken().substring(SENSIBLE_DATA_FIRST_CHAR, SENSIBLE_DATA_LAST_CHAR));
                 }
+                //TODO MGW by Djer |API Google| Tu pourras ajouter/mettre à jours ton AppUser ici
             }
         } catch (IOException e) {
             LOG.error("Exception while trying to store user Credential", e);
@@ -205,9 +206,9 @@ public class GoogleAccount {
         GoogleAuthorizationCodeFlow flow = Utils.getFlow(httpTransport);
         Credential credential = flow.loadCredential(userKey);
         if (credential != null && credential.getAccessToken() != null) {
-            //TODO mgw by Djer |IDE| Tu devrais indiquer ici un TO-DO (ou un FIX-ME) pour indiquer que tu dois finir de l'implÃ©menter.
+            //TODO MGW by Djer |IDE| Tu devrais indiquer ici un TO-DO (ou un FIX-ME) pour indiquer que tu dois finir de l'implémenter.
         } else {
-            //TODO mgw by Djer |IDE| Tu devrais indiquer ici un TO-DO (ou un FIX-ME) pour indiquer que tu dois finir de l'implÃ©menter.
+            //TODO MGW by Djer |IDE| Tu devrais indiquer ici un TO-DO (ou un FIX-ME) pour indiquer que tu dois finir de l'implémenter.
         }
 
         return false;

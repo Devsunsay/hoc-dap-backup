@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.houseofcode.dap.server.mgw.google.GmailService;
 
-//TODO mgw by Djer |JavaDoc| Il devrait y avoir une description de la classe
+//TODO MGW by Djer |JavaDoc| Il devrait y avoir une description de la classe
 /** @author mgw **/
 @RestController
-//TODO mgw by Djer |Spring| Tu aurais pus crÃ©er la mÃ©thode "displayLabel(...) dans le controller "GmailController" comme ces deux Ã©lÃ©ments sont Ã©troitement liÃ©s. "Un controller fait des actions, qui sont associÃ©es Ã  des url. Il rÃ©unit plusieurs pages qui vont avoir un point commun." Gwen Spetembre 2019 ^^.
+//TODO MGW by Djer |Spring| Tu aurais pus créer la méthode "displayLabel(...) dans le controller "GmailController" comme ces deux éléments sont étroitement liés. "Un controller fait des actions, qui sont associées à  des url. Il réunit plusieurs pages qui vont avoir un point commun." Gwen Spetembre 2019 ^^.
 public class LabelController {
     /** Logger. */
     private static final Logger LOG = LogManager.getLogger();
@@ -40,6 +40,7 @@ public class LabelController {
     }
 
     public void setService(GmailService gmailService) {
+        //TODO MGW by Djer |IDE| Supprime les TO-DO automatique une fois que tu les as traités.
         // TODO Auto-generated method stub
         this.service = gmailService;
     }

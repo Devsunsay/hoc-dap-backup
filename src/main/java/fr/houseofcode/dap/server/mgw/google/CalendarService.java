@@ -17,7 +17,7 @@ import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
 
-//TODO mgw by Djer |JavaDoc| Il devrait y avoir une description de la classe
+//TODO MGW by Djer |JavaDoc| Il devrait y avoir une description de la classe
 /** @author mgw **/
 @Service
 public class CalendarService {
@@ -32,7 +32,7 @@ public class CalendarService {
     /**
      * allow the secured access to Calendar.
      * @return an GmailService'instance with secured transport.
-     * @param userKey466 allows a value for the user's parameter added to the url //TODO mgw by Djer |JavaDoc| Tu ne dois pas indiquer le "comment"
+     * @param userKey466 allows a value for the user's parameter added to the url //TODO MGW by Djer |JavaDoc| Tu ne dois pas indiquer le "comment"
      * @throws IOException if the sent or received message is broken.
      * @throws GeneralSecurityException if there's a security failure.
      */
@@ -50,7 +50,7 @@ public class CalendarService {
     /**
      * get the next event.
      * @return the next event if it exists
-     * @param userKey466 allows a value for the user's parameter added to the url //TODO mgw by Djer |JavaDoc| Tu ne dois pas indiquer le "comment"
+     * @param userKey466 allows a value for the user's parameter added to the url //TODO MGW by Djer |JavaDoc| Tu ne dois pas indiquer le "comment"
      * @throws IOException if the sent or received message is broken.
      * @throws GeneralSecurityException if there's a security failure.
      */
@@ -58,8 +58,8 @@ public class CalendarService {
         LOG.info("Get the next event of the gmail account for the user " + userKey466 + ".");
 
         getService(userKey466);
-        //TODO mgw by Djer |POO| Ce commentaire est devenu faux (tu rÃ©cupÃ¨re les 2 prochains)
-        //TODO mgw by Djer |API Google| Pourqoi les **deux** prochains et pas uniquement **le** prochain ?
+        //TODO MGW by Djer |POO| Ce commentaire est devenu faux (tu récupère les 2 prochains). Evite les commentaires dans le code, ils deviennent vite faux.
+        //TODO MGW by Djer |API Google| Pourqoi les **deux** prochains et pas uniquement **le** prochain ?
         // List the next 10 events from the primary calendar.
         DateTime now = new DateTime(System.currentTimeMillis());
         Events events = getService(userKey466).events().list("primary").setMaxResults(2).setTimeMin(now)
@@ -86,14 +86,14 @@ public class CalendarService {
                     end = event.getEnd().getDateTime();
                 }
 
-                eventText = "Event Â«" + eventText + event.getSummary() + "Â» (starting on " + start + "; ending on "
+                eventText = "Event Â«" + eventText + event.getSummary() + "à» (starting on " + start + "; ending on "
                         + end + ")\n";
 
                 //System.out.printf("%s (%s)\n", event.getSummary(), start);
                 LOG.debug("Next event text : " + eventText);
             }
         }
-
+        //TODO MGW by Djer |Rest API| Evite de formater le message sur le serveur. C'est au client (ou ThymLeaf) de le faire. Tu devrais renvoyer une List<Event>.
         return eventText;
 
     }

@@ -3,8 +3,9 @@ package fr.houseofcode.dap.server.mgw;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+//TODO MGW by Djer |JavaDoc| Il devrait y avoir une description de la classe
 /**
- * //TODO mgw by Djer |JavaDoc| Il devrait y avoir une description de la classe
+ * 
  * @author mgw
  */
 @RestController
